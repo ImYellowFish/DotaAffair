@@ -26,7 +26,7 @@ public class Dispatcher<T> where T : System.IConvertible{
             throw new System.ArgumentException("Event to remove does not exist: " + key);  // TODO throw
         }
     }
-
+    
     public void Dispatch(T key, params object[] args) {
         if (debug)
             Debug.Log("dispatch event: " + key);
