@@ -60,6 +60,9 @@ public class CardChoiceMaker : MonoBehaviour {
                 choice = CardChoiceState.Right;
             } else
                 choice = CardChoiceState.None;
+        } else {
+            touchOffset = Vector2.zero;
+            touchOffsetPixels = Vector2.zero;
         }
     }
 
@@ -67,6 +70,9 @@ public class CardChoiceMaker : MonoBehaviour {
     /// Called when a touch is released or ended.
     /// </summary>
     private void OnTouchEnd(params object[] data) {
+        if (table.state != TableState.Idle)
+            return;
+
         switch (choice) {
             case CardChoiceState.Left:
                 ExecuteLeft();
