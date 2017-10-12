@@ -18,16 +18,18 @@ public class CardDispatcher : MonoBehaviour{
     }
 
     public void DispatchRandom() {
-        Debug.Log("Dispatch");
-        dispatcher.Dispatch(CardEvent.DispatchStart);
-        table.StartDispatch();
-        table.card = new EmptyCard();
+        throw new System.NotImplementedException();
     }
 
     public void Dispatch(string cardID) {
+        Dispatch(DataManager.Instance.card.GetEntry(cardID));
+    }
+
+    public void Dispatch(CardDataEntry cardData)
+    {
         Debug.Log("Dispatch");
         table.StartDispatch();
-        table.card = new EmptyCard();
+        table.card = new Card(cardData);
         timer = dispatchDuration;
         start_flip = false;
     }

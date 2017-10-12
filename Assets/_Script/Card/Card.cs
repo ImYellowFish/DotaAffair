@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyCard : ICard {
+public class Card : ICard {
     public CardInfo cardInfo { get { return m_CardInfo; } }
+    private CardInfo m_CardInfo;
     
-    private CardInfo m_CardInfo = new CardInfo(new CardDataEntry());
-    
+    public Card(CardDataEntry cardData)
+    {
+        m_CardInfo = new CardInfo(cardData);
+    }
 
     public void OnLeftChoice()
     {
         Debug.Log("Left");
-        Table.Instance.cardDispatcher.Dispatch("left");
+        CardUtility.ParseNextCard(this, m_CardInfo.leftNextCard);
     }
 
     public void OnRightChoice()
     {
         Debug.Log("Right");
-        Table.Instance.cardDispatcher.Dispatch("right");
+        CardUtility.ParseNextCard(this, m_CardInfo.rightNextCard);
     }
 }

@@ -1,0 +1,8 @@
+﻿ID,Description,Left Text,Right Text,Left Next Card,Right Next Card,Left Event,Right Event
+string;key,string,string,string,string,string,array<enum<none>>,array<enum<none>>
+prologue,this is a prologue.,you choose left.,you choose right.,>,>,,
+event_1,this is the first event.,ok.,no way!,>,end_1,,
+event_2,this is the second event.,ok.,stop!,event_1,end_2,,
+end_1,Ending A. Bad ending.,,,finale,finale,,
+end_2,Ending B. Good ending.,,,finale,finale,,
+finale,This is the end.,,,,,,

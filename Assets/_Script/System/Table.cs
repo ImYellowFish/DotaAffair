@@ -38,7 +38,7 @@ public class Table : MonoBehaviour {
         get { return m_card; }
         set {
             m_card = value;
-            currentCardID = card.cardInfo.ID;
+            currentCardID = value.cardInfo.ID;
         }
     }
 
@@ -80,7 +80,8 @@ public class Table : MonoBehaviour {
 
         cardDispatcher = GetComponent<CardDispatcher>();
         cardDispatcher.Init(this);
-        
+
+        cardDispatcher.Dispatch("prologue");
     }
 
 
