@@ -17,16 +17,21 @@ public class CardChoiceDisplay : MonoBehaviour {
     public float dispatchingAngle;
     public float dispatchingPosX;
     public float dispatchingPosY;
-    
+
+    private CardChoiceState choice;
 
     void Start() {
         table = Table.Instance;
         cardChoiceMaker = table.cardChoiceMaker;
 
+        table.dispatcher.AddListener(CardEvent.ExecuteChoice, OnExecuteChoice);
         table.dispatcher.AddListener(CardEvent.DispatchEnd, OnDispatchEnd);
+        
     }
+    
 
     void OnDestroy() {
+        table.dispatcher.RemoveListener(CardEvent.ExecuteChoice, OnExecuteChoice);
         table.dispatcher.RemoveListener(CardEvent.DispatchEnd, OnDispatchEnd);
     }
 
@@ -48,7 +53,7 @@ public class CardChoiceDisplay : MonoBehaviour {
         } else if (table.state == TableState.Dispatching) {
             // update based on left in idle state
             float sgn = 1;
-            if (cardChoiceMaker.choice == CardChoiceState.Left) {
+            if (choice == CardChoiceState.Left) {
                 sgn = -1;
             }
             desiredCardPos.x = sgn * maxCardPosX * dispatchingPosX;
@@ -68,6 +73,11 @@ public class CardChoiceDisplay : MonoBehaviour {
     }
 
 
+    private void OnExecuteChoice(params object[] data)
+    {
+        choice = (CardChoiceState)data[0];
+    }
+
     /// <summary>
     /// Reset the card rectTransform when a new card is dispatched.
     /// </summary>
@@ -76,6 +86,7 @@ public class CardChoiceDisplay : MonoBehaviour {
         card.localRotation = Quaternion.identity;
         currentCardPos = Vector2.zero;
         card.anchoredPosition = currentCardPos;
+        choice = CardChoiceState.None;
     }
 
     private float AbsEvaluate(AnimationCurve curve, float t)

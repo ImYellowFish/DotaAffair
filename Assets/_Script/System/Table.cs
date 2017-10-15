@@ -7,6 +7,14 @@ using UnityEngine;
 public enum CardEvent {
     None = 0,
 
+    Prepare = 50,
+    ExitPrepare = 51,
+    PrepareLeft = 55,
+    ExitPrepareLeft = 56,
+    PrepareRight = 60,
+    ExitPrepareRight = 61,
+
+
     ExecuteChoice = 100,
     ExecuteLeft = 110,
     ExecuteRight = 120,

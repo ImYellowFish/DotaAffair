@@ -29,18 +29,35 @@ public class CardDataEntry : CSVDataUtility.IDataEntry{
 	[CSVField("left next card")]
 	public string left_next_card;
 
+	[CSVField("left event")]
+	public CSVDataUtility.Action.ActionInfo left_event;
+
+    [System.NonSerialized]
+    public static System.Action left_event_action_none = delegate { };
+
+    public void Invoke_left_event()
+    {
+        int paramIndex = 0;
+
+        for (int i = 0; i < left_event.callList.Count; i++)
+        {
+            switch (left_event.callList[i])
+            {
+                
+                case 0:
+                    left_event_action_none.Invoke();
+                    paramIndex += 0;
+                    break; 
+
+            }
+        }
+    }
+
 	[CSVField("right next card")]
 	public string right_next_card;
 
-	[CSVField("left event")]
-	public List<left_event_values> left_event;
-
-	public enum left_event_values { none = 0, }
-
 	[CSVField("right event")]
-	public List<right_event_values> right_event;
-
-	public enum right_event_values { none = 0, }
+	public CSVDataUtility.Action.ActionInfo right_event;
 
 
 

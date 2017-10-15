@@ -48,22 +48,67 @@ public class CardChoiceMaker : MonoBehaviour {
     /// </summary>
     /// <param name="touchOffsetPixels"></param>
     private void UpdateTouchOffset() {
+        CardChoiceState newChoice;
+        
         // only update when table is in idle state
         if (table.state == TableState.Idle) {
 
             touchOffset = InputManager.Instance.touchOffset;
             touchOffsetPixels = InputManager.Instance.touchOffsetPixels;
 
-            if (touchOffsetPixels.x <= -choiceInputThreshold) {
-                choice = CardChoiceState.Left;
-            } else if (touchOffsetPixels.x >= choiceInputThreshold) {
-                choice = CardChoiceState.Right;
-            } else
-                choice = CardChoiceState.None;
+            
+            if (touchOffsetPixels.x <= -choiceInputThreshold)
+            {
+                newChoice = CardChoiceState.Left;
+                
+            }
+            else if (touchOffsetPixels.x >= choiceInputThreshold)
+            {
+                newChoice = CardChoiceState.Right;
+            }
+            else
+            {
+                newChoice = CardChoiceState.None;
+            }
+
         } else {
+            newChoice = CardChoiceState.None;
             touchOffset = Vector2.zero;
             touchOffsetPixels = Vector2.zero;
         }
+
+        CheckChoiceChange(newChoice);
+    }
+
+
+    private void CheckChoiceChange(CardChoiceState newChoice)
+    {
+        if (newChoice == choice)
+            return;
+
+        if(newChoice == CardChoiceState.Left)
+        {
+            dispatcher.Dispatch(CardEvent.Prepare, newChoice, choice);
+            dispatcher.Dispatch(CardEvent.PrepareLeft, newChoice, choice);
+        }
+        else if(newChoice == CardChoiceState.Right)
+        {
+            dispatcher.Dispatch(CardEvent.Prepare, newChoice, choice);
+            dispatcher.Dispatch(CardEvent.PrepareRight, newChoice, choice);
+        }
+
+        if(choice == CardChoiceState.Left)
+        {
+            dispatcher.Dispatch(CardEvent.ExitPrepare, newChoice, choice);
+            dispatcher.Dispatch(CardEvent.ExitPrepareLeft, newChoice, choice);
+        }
+        else if(choice == CardChoiceState.Right)
+        {
+            dispatcher.Dispatch(CardEvent.ExitPrepare, newChoice, choice);
+            dispatcher.Dispatch(CardEvent.ExitPrepareRight, newChoice, choice);
+        }
+
+        choice = newChoice;
     }
 
     /// <summary>
@@ -86,14 +131,14 @@ public class CardChoiceMaker : MonoBehaviour {
     }
 
     private void ExecuteLeft() {
-        dispatcher.Dispatch(CardEvent.ExecuteChoice);
+        dispatcher.Dispatch(CardEvent.ExecuteChoice, choice);
         dispatcher.Dispatch(CardEvent.ExecuteLeft);
         card.OnLeftChoice();
 
     }
 
     private void ExecuteRight() {
-        dispatcher.Dispatch(CardEvent.ExecuteChoice);
+        dispatcher.Dispatch(CardEvent.ExecuteChoice, choice);
         dispatcher.Dispatch(CardEvent.ExecuteRight);
         card.OnRightChoice();
 
