@@ -40,15 +40,15 @@ public class ChoiceTipDisplay : MonoBehaviour {
         {
             SetMaskRotation(-_Card.transform.localEulerAngles.z);
         }
-	}
+        _ChoiceBG.transform.rotation = Quaternion.identity;
+    }
 
     public void SetMaskRotation(float angle)
     {
         if (angle < -180)
             angle += 360;
-
-        _ChoiceBG.transform.localRotation = Quaternion.Euler(0, 0, angle);
-        SetLocalPosX(_animationCurve.Evaluate(angle / _maxAngle) * _maxXoffset);
+        
+        SetLocalAnchoredPosX(_animationCurve.Evaluate(angle / _maxAngle) * _maxXoffset);
      //   Debug.Log("angle = " + angle);
     }
 
@@ -107,10 +107,10 @@ public class ChoiceTipDisplay : MonoBehaviour {
         }
     }
 
-    private void SetLocalPosX(float posX)
+    private void SetLocalAnchoredPosX(float posX)
     {
-        Vector3 oldPos = _ChoiceTip.transform.localPosition;
-        _ChoiceTip.transform.localPosition = new Vector3(posX, oldPos.y, oldPos.z);
+        Vector3 oldPos = _ChoiceTip.rectTransform.anchoredPosition;
+        _ChoiceTip.rectTransform.anchoredPosition = new Vector3(posX, oldPos.y, oldPos.z);
 
       //  Debug.Log("posX = " + posX);
     }

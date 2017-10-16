@@ -1,8 +1,8 @@
-﻿ID,Description,Left Text,Right Text,Left Next Card,Left Event,Right Next Card,Right Event
-string;key,string,string,string,string,action<none<>>,string,ref<Left Event>
-prologue,this is a prologue.,you choose left.,you choose right.,>,,>,
-event_1,this is the first event.,ok.,no way!,>,,end_1,
-event_2,this is the second event.,ok.,stop!,event_1,,end_2,
-end_1,Ending A. Bad ending.,,,finale,,finale,
-end_2,Ending B. Good ending.,,,finale,,finale,
+ID,Description,Left Text,Left Value,Left Next Card,Right Text,Right Value,Right Next Card
+string;key,string,string,array<int>,string,string,array<int>,string
+prologue,this is a prologue.,you choose left.,,>,you choose right.,,>
+event_1,this is the first event.,ok.,,>,no way!,,end_1
+event_2,this is the second event.,ok.,,event_1,stop!,,end_2
+end_1,Ending A. Bad ending.,,,finale,,,finale
+end_2,Ending B. Good ending.,,,finale,,,finale
 finale,This is the end.,,,,,,

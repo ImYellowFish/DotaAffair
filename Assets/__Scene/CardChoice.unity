@@ -1063,7 +1063,7 @@ MonoBehaviour:
   inputMultiplier: {x: 5, y: 5}
   smooth: 5
   maxAngle: 15
-  maxCardPosX: 400
+  maxCardPosX: 300
   maxCardPosY: 100
   curveOffsetX_Versus_CardAngle:
     serializedVersion: 2
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  _maxXoffset: 200
+  _maxXoffset: 250
 --- !u!1 &2105785678
 GameObject:
   m_ObjectHideFlags: 0
