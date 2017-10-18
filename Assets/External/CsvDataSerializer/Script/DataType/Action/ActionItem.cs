@@ -65,7 +65,9 @@ namespace CSVDataUtility.Action
             for (int i = 0; i < paramStringArray.Length; i++)
             {
                 var param = paramStringArray[i];
-                actionInfo.paramList.Add(new ActionParameter(param, parameterTypes[i].GetTypeNameForWriter(variableName)));
+                var actionParam = new ActionParameter(param, parameterTypes[i].GetTypeNameForWriter(variableName));
+                actionParam.DeserializeValue();
+                actionInfo.paramList.Add(actionParam);
             }
         }
 
@@ -77,9 +79,10 @@ namespace CSVDataUtility.Action
             string[] rawValues = paramsTypeStr.Split(';');
             foreach (string childTypeField in rawValues)
             {
-                if (childTypeField == "")
+                var correctedType = Helper.CorrectHeadItemString(childTypeField);
+                if (correctedType == "")
                     continue;
-                var childDataType = DataTypeFactory.GetBaseDataType(childTypeField);
+                var childDataType = DataTypeFactory.GetBaseDataType(correctedType);
                 parameterTypes.Add(childDataType);
             }
         }
