@@ -41,6 +41,7 @@ public class Table : MonoBehaviour {
     public CardDispatcher cardDispatcher { get; private set; }
     public Dispatcher<CardEvent> dispatcher;
 
+    public string initialCardID;
     public string currentCardID;
     public ICard card {
         get { return m_card; }
@@ -78,6 +79,7 @@ public class Table : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         dispatcher = new Dispatcher<CardEvent>();
+        CardActionUtility.InitActions();
     }
 
     void Start() {

@@ -1,3 +1,4 @@
 ID,Conditions
 string;key,array<struct<string variable;string _operator;int value>>
-test_condition,globalVar;>;14
+test_condition,test_gvar_csv_0;>;14
+test_condition_2,test_gvar_csv_0;<=;14

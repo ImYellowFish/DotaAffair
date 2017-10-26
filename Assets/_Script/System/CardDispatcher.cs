@@ -22,7 +22,7 @@ public class CardDispatcher : MonoBehaviour{
     }
 
     public void Dispatch(string cardID) {
-        Dispatch(DataManager.Instance.card.GetEntry(cardID));
+        Dispatch(CsvDataManager.Instance.card.GetEntry(cardID));
     }
 
     public void Dispatch(CardDataEntry cardData)

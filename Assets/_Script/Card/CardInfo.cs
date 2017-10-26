@@ -13,6 +13,7 @@ public class CardInfo
 
     public string leftNextCard { get { return cardData.left_next_card; } }
     public string rightNextCard { get { return cardData.right_next_card; } }
+    public Sprite sprite { get { return CardUIUtility.LoadCardSprite(cardData.sprite); } }
 
     public CardInfo()
     {

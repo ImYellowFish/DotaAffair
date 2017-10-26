@@ -8,7 +8,7 @@ namespace DotaAffair.Extensions
     {
         public static bool IsLast(this CardDataEntry card)
         {
-            return DataManager.Instance.cardIndexer.IsLast(card);
+            return CsvDataManager.Instance.cardIndexer.IsLast(card);
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace DotaAffair.Extensions
             {
                 throw new System.ArgumentOutOfRangeException("Reached last card when trying to get the next card!");
             }
-            return DataManager.Instance.cardIndexer.Next(card);
+            return CsvDataManager.Instance.cardIndexer.Next(card);
         }
     }
 }

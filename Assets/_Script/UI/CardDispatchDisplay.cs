@@ -8,8 +8,12 @@ public class CardDispatchDisplay : MonoBehaviour {
     public Image newCard;
     public Sprite cardBackground;
 
-    // TODO: assign this from table
-    public Sprite cardForeground;
+    public Sprite cardForeground {
+        get {
+            return Table.Instance.card.cardInfo.sprite;
+        }
+    }
+
     public string flipAnimName;
     
     /// <summary>
@@ -83,6 +87,7 @@ public class CardDispatchDisplay : MonoBehaviour {
     private void EnterFlipFrontState() {
         state = CardFlipState.FlipFront;
         newCard.sprite = cardForeground;
+        card.sprite = cardForeground;
     }
 
     private void ExitFlipState() {

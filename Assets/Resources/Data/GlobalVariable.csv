@@ -1,0 +1,7 @@
+ID,Initial Value
+string;key,int
+main_boy_hp,100
+main_girl_hp,150
+main_love,80
+test_gvar_csv_0,15
+test_gvar_csv_1,50

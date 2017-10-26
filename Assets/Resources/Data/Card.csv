@@ -1,8 +1,8 @@
-ID,Description,Left Text,Left Value,Left Next Card,Left Event,Right Text,Right Value,Right Next Card,Right Event
-string;key,string,string,array<int>,string,action<none<> goto_if<string;string>>,string,array<int>,string,ref<Left Event>
-prologue,this is a prologue.,you choose left.,,>,,you choose right.,,>,
-event_1,this is the first event.,ok.,,>,,no way!,,end_1,
-event_2,this is the second event.,ok.,,event_1,,stop!,,end_2,
-end_1,Ending A. Bad ending.,,,finale,,,,finale,
-end_2,Ending B. Good ending.,,,finale,,,,finale,
-finale,This is the end.,,,,,,,,
+ID,Sprite,Description,Left Text,Left Value,Left Next Card,Left Event,Right Text,Right Value,Right Next Card,Right Event
+string;key,string,string,string,array<int>,string,action<none<> goto_if<string;string> goto_ifnot<string;string>>,string,array<int>,string,ref<Left Event>
+prologue,default_tufu_front,this is a prologue.,you choose left.,,>,,you choose right.,,>,
+event_1,default_tufu_front,this is the first event.,ok.,10;-20;10,,goto_if<end_1;test_condition> goto_ifnot<end_2;test_condition>,no way!,20;-20,,goto_if<end_1;test_condition> goto_ifnot<end_2;test_condition>
+event_2,default_tufu_front,this is the second event.,ok.,,event_1,,stop!,,end_2,
+end_1,default_tufu_front,Ending A. Bad ending.,,,finale,,,,finale,
+end_2,default_tufu_front,Ending B. Good ending.,,,finale,,,,finale,
+finale,,This is the end.,,,prologue,,,,prologue,

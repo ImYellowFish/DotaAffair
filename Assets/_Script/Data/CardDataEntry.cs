@@ -17,6 +17,9 @@ public class CardDataEntry : CSVDataUtility.IDataEntry{
 	[CSVField("id")]
 	public string id;
 
+	[CSVField("sprite")]
+	public string sprite;
+
 	[CSVField("description")]
 	public string description;
 
@@ -38,6 +41,9 @@ public class CardDataEntry : CSVDataUtility.IDataEntry{
     [System.NonSerialized]
     public static System.Action<string, string> left_event_action_goto_if = delegate { };
 
+    [System.NonSerialized]
+    public static System.Action<string, string> left_event_action_goto_ifnot = delegate { };
+
     public void Invoke_left_event()
     {
         int paramIndex = 0;
@@ -57,6 +63,11 @@ public class CardDataEntry : CSVDataUtility.IDataEntry{
                     paramIndex += 2;
                     break; 
 
+                case 2:
+                    left_event_action_goto_ifnot.Invoke((string)left_event.paramList[paramIndex + 0].Value, (string)left_event.paramList[paramIndex + 1].Value);
+                    paramIndex += 2;
+                    break; 
+
             }
         }
     }
@@ -72,6 +83,34 @@ public class CardDataEntry : CSVDataUtility.IDataEntry{
 
 	[CSVField("right event")]
 	public CSVDataUtility.Action.ActionInfo right_event;
+
+    public void Invoke_right_event()
+    {
+        int paramIndex = 0;
+
+        for (int i = 0; i < right_event.callList.Count; i++)
+        {
+            switch (right_event.callList[i])
+            {
+                
+                case 0:
+                    left_event_action_none.Invoke();
+                    paramIndex += 0;
+                    break; 
+
+                case 1:
+                    left_event_action_goto_if.Invoke((string)right_event.paramList[paramIndex + 0].Value, (string)right_event.paramList[paramIndex + 1].Value);
+                    paramIndex += 2;
+                    break; 
+
+                case 2:
+                    left_event_action_goto_ifnot.Invoke((string)right_event.paramList[paramIndex + 0].Value, (string)right_event.paramList[paramIndex + 1].Value);
+                    paramIndex += 2;
+                    break; 
+
+            }
+        }
+    }
 
 
 
